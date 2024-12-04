@@ -32,3 +32,15 @@ anime
     easing: "easeOutExpo",
     delay: 1000,
   });
+// JavaScript: app.js
+document.getElementById("showMessage").style.display = "none"; // Hide the second screen initially.
+
+function propose() {
+    document.getElementById("parentElement").style.display = "none"; // Hide the first section.
+    document.getElementById("showMessage").style.display = "block"; // Show the second screen.
+
+    // Redirect to Telegram link after a delay.
+    setTimeout(() => {
+        window.location.href = "https://t.me/dead_d_man"; // Telegram link
+    }, 3000); // 3-second delay before redirecting.
+}
