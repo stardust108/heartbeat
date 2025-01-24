@@ -10,40 +10,87 @@
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .logo {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            margin: 10px;
+            animation: none;
+        }
+        .emoji-rain {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            pointer-events: none;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 5px); }
+            50% { transform: translate(5px, -5px); }
+            75% { transform: translate(-5px, -5px); }
+        }
+    </style>
 </head>
 <body>
-    <div class="position-absolute top-50 start-50 translate-middle">
-        <div id="parentElement">
-            <div class="d-flex justify-content-center">
-                <lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_mywfoph1.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
-            </div>
-                <h1>𝑆𝑇𝐴𝑅𝐷𝑈𝑆𝑇 𝐴𝑆𝐾𝐼𝑁𝐺:- 💏Will you be my bestfriend🥰?</h1>
-            <div class="d-flex justify-content-center">
-                <button onclick="propose()" class="btn btn-primary">Yes!</button> <br>
-                <button onclick="propose()" class="btn btn-primary">Of Course, Yes!</button>
-            </div>
-        </div>
-        <div class="position-absolute top-50 start-50 translate-middle" id="showMessage">
-            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_utsfwa3k.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop autoplay></lottie-player>
-            <h1 class="ml6" >
-                <span class="text-wrapper">
-                    <span class="letters"> chal hatt badi aayi bestfriend banne </span>
-                </span>
-            </h1>
-        </div>
+    <div class="d-flex justify-content-center mt-3">
+        <!-- Two Logos -->
+        <div id="logo1" class="logo" style="background-image: url('logo1.png');"></div>
+        <div id="logo2" class="logo" style="background-image: url('logo2.png');"></div>
     </div>
-    <!-- <footer class="position-absolute top-100 start-50 translate-middle">Made with 💝 love by <a href="">stardust</a> <footer> -->
 
+    <h1 class="mt-4">𝑆𝑇𝐴𝑅𝐷𝑈𝑆𝑇 𝐴𝑆𝐾𝐼𝑁𝐺:- 💏 Will you be my bestfriend? 🥰</h1>
+    <div>
+        <button onclick="propose()" class="btn btn-primary me-2">Yes!</button>
+        <button onclick="propose()" class="btn btn-primary">Of Course, Yes!</button>
+    </div>
 
+    <div id="emojiRain" class="emoji-rain" style="display: none;">
+        <!-- Placeholder for emojis -->
+    </div>
 
     <!-- LottieFiles CDN -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <!-- Anim JS CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="app.js"></script>
+
+    <script>
+        function propose() {
+            // Shake animation for logos
+            document.getElementById('logo1').style.animation = 'shake 1s infinite';
+            document.getElementById('logo2').style.animation = 'shake 1s infinite';
+
+            // Emoji rain effect
+            const emojiRain = document.getElementById('emojiRain');
+            emojiRain.style.display = 'block';
+            for (let i = 0; i < 50; i++) {
+                const emoji = document.createElement('div');
+                emoji.innerHTML = randomEmoji();
+                emoji.style.position = 'absolute';
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.top = '-5vh';
+                emoji.style.fontSize = Math.random() * 30 + 20 + 'px';
+                emoji.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+
+                // Append emoji to container
+                emojiRain.appendChild(emoji);
+
+                // Remove emoji after animation ends
+                setTimeout(() => emoji.remove(), 5000);
+            }
+        }
+
+        function randomEmoji() {
+            const emojis = ['💞', '❤️', '❣️', '🖤', '💙', '💚', '💛', '💜', '🧡', '❤️‍🔥', '🩷', '🌹'];
+            return emojis[Math.floor(Math.random() * emojis.length)];
+        }
+    </script>
 </body>
 </html>
